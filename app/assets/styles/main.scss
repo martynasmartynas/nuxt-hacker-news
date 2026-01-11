@@ -1,0 +1,15 @@
+body {
+  background-color: $primary-background;
+  color: $primary-color;
+  font-family: $font-family;
+  min-height: 100vh;
+  margin: 0;
+}
+a {
+  color: $accent-color;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
