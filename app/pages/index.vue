@@ -29,7 +29,9 @@
       <article v-for="item in sortedNews" :key="item.id">
         <img src="/hacker.webp" alt="Hacker news" />
         <div>
-          <h2>{{ item.title }}</h2>
+          <NuxtLink :to="`/news/${item.id}`">
+            <h2>{{ item.title }}</h2>
+          </NuxtLink>
           <div class="news-item-meta">
             <span>Score -> {{ item.score }}</span>
             <span>By -> {{ item.author?.id }} with {{ item.author?.karma }} karma points</span>
