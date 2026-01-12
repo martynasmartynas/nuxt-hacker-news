@@ -10,6 +10,10 @@
   } = await useFetch('/api/news', {
     lazy: true
   })
+  const sortingKey = ref<'score' | 'author.karma'>('score')
+  const sortedNews = computed(() => {
+    return sortData(news?.value ?? [], sortingKey.value)
+  })
 </script>
 
 <template>
@@ -18,12 +22,17 @@
     <div v-if="status === 'pending'">Loading news...</div>
     <div v-else-if="error">Error loading news: {{ error.message }}</div>
     <div v-else>
-      <article v-for="item in news" :key="item.id">
+      <div class="sorting-buttons">
+        <button @click="sortingKey = 'score'">Sort by Score</button>
+        <button @click="sortingKey = 'author.karma'">Sort by Author Karma</button>
+      </div>
+      <article v-for="item in sortedNews" :key="item.id">
         <img src="/hacker.webp" alt="Hacker news" />
         <div>
           <h2>{{ item.title }}</h2>
           <div class="news-item-meta">
-            <span>By -> {{ item.author?.id }} with {{ item.score }} points</span>
+            <span>Score -> {{ item.score }}</span>
+            <span>By -> {{ item.author?.id }} with {{ item.author?.karma }} karma points</span>
             <span>At -> {{ formatDate(item.time) }}</span>
           </div>
         </div>
@@ -55,8 +64,17 @@
   .news-item-meta {
     font-size: 0.9rem;
     color: #666;
+    font-family: $font-family-monospace;
     span {
       display: block;
+    }
+  }
+  .sorting-buttons {
+    margin-bottom: 1rem;
+    button {
+      margin-right: 0.5rem;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
     }
   }
 </style>
