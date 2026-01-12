@@ -24,7 +24,7 @@
           <h2>{{ item.title }}</h2>
           <div class="news-item-meta">
             <span>By -> {{ item.author?.id }} with {{ item.score }} points</span>
-            <span>At -> {{ item.time }}</span>
+            <span>At -> {{ formatDate(item.time) }}</span>
           </div>
         </div>
       </article>
