@@ -33,3 +33,8 @@ Locally preview production build:
 # pnpm
 pnpm preview
 ```
+
+## Extras
+
+I have spend around 4 hours for this task.
+sortData is a function that I looked up on the google and adjusted for my needs
